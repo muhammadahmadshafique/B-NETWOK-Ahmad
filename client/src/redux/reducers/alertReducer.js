@@ -1,10 +1,10 @@
-import { notifyConstants } from '../constants'
+import { GLOBALTYPES } from '../constants'
 
 const initialState = {}
 
 const notifyReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case notifyConstants.NOTIFY:
+		case GLOBALTYPES.ALERT:
 			return action.payload
 
 		default:

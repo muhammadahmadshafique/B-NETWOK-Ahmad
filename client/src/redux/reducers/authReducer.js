@@ -1,10 +1,10 @@
-import { authConstants } from '../constants'
+import { GLOBALTYPES } from '../constants'
 
 const initialState = {}
 
 const authReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case authConstants.AUTH:
+		case GLOBALTYPES.AUTH:
 			return action.payload
 
 		default:

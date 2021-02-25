@@ -1,7 +1,4 @@
-export const authConstants = {
+export const GLOBALTYPES = {
 	AUTH: 'AUTH',
-}
-
-export const notifyConstants = {
-	NOTIFY: 'NOTIFY',
+	ALERT: 'ALERT',
 }
