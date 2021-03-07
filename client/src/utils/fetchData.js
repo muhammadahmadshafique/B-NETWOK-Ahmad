@@ -33,7 +33,7 @@ export const patchDataApi = async (url, post, token) => {
 }
 
 export const daleteDataApi = async (url, token) => {
-	const res = await axios.patch(`/api/${url}`, {
+	const res = await axios.delete(`/api/${url}`, {
 		headers: { Authorization: token },
 	})
 

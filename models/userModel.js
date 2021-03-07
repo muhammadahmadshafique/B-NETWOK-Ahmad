@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema(
 	{
@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema(
 		},
 		avatar: {
 			type: String,
-			default: 'https://www.pikpng.com/pngl/m/80-805523_default-avatar-svg-png-icon-free-download-264157.png',
+			default: 'https://toppng.com/uploads/preview/instagram-default-profile-picture-11562973083brycehrmyv.png',
 		},
 		role: { type: String, default: 'user' },
 		gender: { type: String, default: 'male' },
@@ -39,6 +39,6 @@ const userSchema = mongoose.Schema(
 		following: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
 	},
 	{ timestamps: true }
-);
+)
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('user', userSchema)

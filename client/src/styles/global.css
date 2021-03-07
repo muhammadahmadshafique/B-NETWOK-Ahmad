@@ -45,3 +45,6 @@ img {
 
 /* -----HEADER------ */
 @import url('./header.css');
+
+/* ---- Profile ---- */
+@import url('./profile.css');
