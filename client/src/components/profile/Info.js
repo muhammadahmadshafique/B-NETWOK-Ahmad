@@ -49,12 +49,12 @@ const Info = () => {
 							<span className="mr-4">{user.followers.length} Followers</span>
 							<span className="ml-4">{user.following.length} Following</span>
 						</div>
-
+						<br />
 						<h6>
-							{user.fullname} {user.mobile}
+							{user.fullname} <span className="text-danger ml-3">{user.mobile}</span>
 						</h6>
 						<p className="m-0">{user.address}</p>
-						<h6>{user.email}</h6>
+						<h6 className="m-0">{user.email}</h6>
 						<a href={user.website} target="_blank" rel="noneferror">
 							{user.website}
 						</a>
