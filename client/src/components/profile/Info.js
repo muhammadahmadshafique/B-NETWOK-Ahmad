@@ -41,7 +41,7 @@ const Info = () => {
 									Edit Profile
 								</button>
 							) : (
-								<FollowBtn />
+								<FollowBtn user={user} />
 							)}
 						</div>
 
