@@ -60,7 +60,17 @@ export const updateProfileUser = ({ userData, avatar, auth }) => async (dispatch
 }
 
 export const follow = ({ users, user, auth }) => async (dispatch) => {
-	let newUser = { ...user, followers: [...user.followers, auth.user] }
+	let newUser
+
+	if (users.every((item) => item._id !== user._id)) {
+		newUser = { ...user, followers: [...user.followers, auth.user] }
+	} else {
+		users.forEach((item) => {
+			if (item._id === user._id) {
+				newUser = { ...item, followers: [...item.followers, auth.user] }
+			}
+		})
+	}
 
 	dispatch({ type: PROFILE_TYPES.FOLLOW, payload: newUser })
 
@@ -74,10 +84,26 @@ export const follow = ({ users, user, auth }) => async (dispatch) => {
 			},
 		},
 	})
+
+	try {
+		await patchDataApi(`user/${user._id}/follow`, null, auth.token)
+	} catch (error) {
+		dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
+	}
 }
 
 export const unfollow = ({ users, user, auth }) => async (dispatch) => {
-	let newUser = { ...user, followers: DeleteData(user.followers, auth.user._id) }
+	let newUser
+
+	if (users.every((item) => item._id !== user._id)) {
+		newUser = { ...user, followers: DeleteData(user.followers, auth.user._id) }
+	} else {
+		users.forEach((item) => {
+			if (item._id === user._id) {
+				newUser = { ...item, followers: DeleteData(item.followers, auth.user._id) }
+			}
+		})
+	}
 
 	dispatch({ type: PROFILE_TYPES.UNFOLLOW, payload: newUser })
 
@@ -91,4 +117,10 @@ export const unfollow = ({ users, user, auth }) => async (dispatch) => {
 			},
 		},
 	})
+
+	try {
+		await patchDataApi(`user/${user._id}/unfollow`, null, auth.token)
+	} catch (error) {
+		dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
+	}
 }
