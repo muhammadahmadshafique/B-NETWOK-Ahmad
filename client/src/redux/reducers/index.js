@@ -5,6 +5,7 @@ import alertReducer from './alertReducer'
 import themeReducer from './themeReducer'
 import profileReducer from './profileReducer'
 import statusReducer from './statusReducer'
+import postReducer from './postReducer'
 
 export default combineReducers({
 	auth: authReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
 	theme: themeReducer,
 	profile: profileReducer,
 	status: statusReducer,
+	homePost: postReducer,
 })
