@@ -54,3 +54,37 @@
 	display: flex;
 	margin: 5px;
 }
+
+/* ---- POST CARD BODY ---- */
+
+.posts .card_body_content{
+	padding: 0 25px;
+	margin-top: -10px;
+	margin-bottom: 10px;
+
+}
+
+.posts .card_body_content .readMore {
+	color: crimson;
+	cursor: pointer;
+	font-weight: 500
+}
+
+/* ---- Post Card Footer */
+.posts .card_icon_menu {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 25px;
+	cursor: pointer;
+}
+
+.posts .card_icon_menu i {
+	font-size: 28px;
+	margin: 10px;
+}
+
+.posts .card_icon_menu img {
+	width: 28px;
+	height: 28px;
+	transform: translate(5px,  -5px)
+}

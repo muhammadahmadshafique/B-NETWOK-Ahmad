@@ -6,6 +6,7 @@
 	left: 0;
 	z-index: 2;
 	box-shadow: 0 0 10px #ddd;
+	background: #f8f9fa
 }
 
 .header .navbar {
@@ -102,12 +103,14 @@
 
 @media (max-width: 768px) {
 	.header .menu {
-		position: fixed;
-		bottom: 0;
+		position: absolute;
+		top: calc(100vh - 50px);
 		left: 0;
 		width: 100%;
+		height: 50px;
 		box-shadow: 0 0 10px #ddd;
 		z-index: 2;
+		background: #f8f9fa
 	}
 
 	.header .menu .navbar-nav {
