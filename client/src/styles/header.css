@@ -1,12 +1,14 @@
 .header {
 	width: 100%;
-	min-height: 70px;
+	min-height: 60px;
 	position: sticky;
 	top: 0;
 	left: 0;
 	z-index: 2;
 	box-shadow: 0 0 10px #ddd;
-	background: #f8f9fa
+	background: #f8f9fa;
+	border: 1px solid rgb(0,0, 0, .125);
+	border-radius: 10px
 }
 
 .header .navbar {
@@ -55,8 +57,10 @@
 	width: 100%;
 	outline: none;
 	text-indent: 5px;
-	border-radius: 3px;
+	border-radius: 10px;
+	
 }
+
 
 .header .search_form .search_icon {
 	position: absolute;
@@ -110,7 +114,8 @@
 		height: 50px;
 		box-shadow: 0 0 10px #ddd;
 		z-index: 2;
-		background: #f8f9fa
+		background: #f8f9fa;
+		border: 1px solid rgb(0,0, 0, .125);
 	}
 
 	.header .menu .navbar-nav {

@@ -16,19 +16,23 @@ app.use('/api', require('./routes/postRouter'))
 
 const URI = process.env.MONGO_DB_URL
 
-mongoose.connect(
-	URI,
-	{
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useCreateIndex: true,
-		useFindAndModify: false,
-	},
-	(error) => {
-		if (error) throw error
-		console.log('Connected to mongoDB')
-	}
-)
+const connectDB = async () => {
+	await mongoose.connect(
+		URI,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+			useCreateIndex: true,
+			useFindAndModify: true,
+		},
+		(error) => {
+			if (error) throw error
+			console.log('Connected to mongoDB')
+		}
+	)
+}
+
+connectDB()
 
 const port = process.env.PORT || 5000
 

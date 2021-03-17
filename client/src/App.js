@@ -18,7 +18,7 @@ import StatusModal from './components/StatusModal'
 import { getPosts } from './redux/actions/postAction'
 
 function App() {
-	const { auth, status } = useSelector((state) => state)
+	const { auth, status, modal } = useSelector((state) => state)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -29,11 +29,12 @@ function App() {
 		if (auth.token) dispatch(getPosts(auth.token))
 	}, [dispatch, auth.token])
 
+	const d = new Date()
 	return (
 		<Router>
 			<Alert />
 			<input id="theme" type="checkbox" />
-			<div className="App">
+			<div className={`App ${(status || modal) && 'mode'}`}>
 				<div className="main">
 					{auth.token && <Header />}
 					{status && <StatusModal />}
