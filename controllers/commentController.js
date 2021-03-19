@@ -18,7 +18,9 @@ const commentController = {
 			await newComment.save()
 
 			res.json({ newComment })
-		} catch (error) {}
+		} catch (error) {
+			return res.status(500).json({ msg: error.message })
+		}
 	},
 }
 
