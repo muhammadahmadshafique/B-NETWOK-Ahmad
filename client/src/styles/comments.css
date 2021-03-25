@@ -28,7 +28,7 @@
 .comment_card .comment_content {
 	background: #eee;
 	padding: 7px;
-	border-radius: 10px;
+	border-radius: 15px;
 	border-top-left-radius: 0;
 	display: flex;
 	justify-content: space-between;
@@ -58,4 +58,9 @@
 .comment_card .comment_content .dropdown-item {
 	display: flex;
 	margin: 10px 0;
+}
+.comment_card .comment_content textarea {
+	width: 100%;
+	border: none;
+	outline: none;
 }
