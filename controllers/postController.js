@@ -37,10 +37,12 @@ const postController = {
 		try {
 			const { content, images } = req.body
 
-			const post = await Posts.findOneAndUpdate({ _id: req.params.id }, { content, images }).populate(
-				'user likes',
-				'avatar username fullname'
-			)
+			const post = await Posts.findOneAndUpdate({ _id: req.params.id }, { content, images })
+				.populate('user likes', 'avatar username fullname')
+				.populate({
+					path: 'comments',
+					populate: { path: 'user likes', select: '-password' },
+				})
 
 			res.json({
 				msg: 'Post Updated!',
@@ -86,6 +88,31 @@ const postController = {
 			)
 
 			res.json({ msg: 'Post is Unliked!!' })
+		} catch (error) {
+			return res.status(500).json({ msg: error.message })
+		}
+	},
+
+	getUserPosts: async (req, res) => {
+		try {
+			const posts = await Posts.find({ user: req.params.id }).sort('-createdAt')
+
+			res.json({ posts, result: posts.length })
+		} catch (error) {
+			return res.status(500).json({ msg: error.message })
+		}
+	},
+
+	getPost: async (req, res) => {
+		try {
+			const post = await Posts.findById(req.params.id)
+				.populate('user likes', 'avatar username fullname')
+				.populate({
+					path: 'comments',
+					populate: { path: 'user likes', select: '-password' },
+				})
+
+			res.json({ post })
 		} catch (error) {
 			return res.status(500).json({ msg: error.message })
 		}

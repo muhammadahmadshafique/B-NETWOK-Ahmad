@@ -5,8 +5,9 @@ import { postDataApi, getDataApi, patchDataApi } from '../../utils/fetchData'
 export const POST_TYPES = {
 	CREATE_POST: 'CREATE_POST',
 	LOADING_POST: 'LOADING_POST',
-	GET_POST: 'GET_POST',
+	GET_POSTS: 'GET_POSTS',
 	UPDATE_POST: 'UPDATE_POST',
+	GET_POST: 'GET_POST',
 }
 
 export const createPost = ({ content, images, auth }) => async (dispatch) => {
@@ -27,12 +28,12 @@ export const createPost = ({ content, images, auth }) => async (dispatch) => {
 	}
 }
 
-export const getPosts = (token) => async (dispatch) => {
+export const getPosts = ({ auth }) => async (dispatch) => {
 	try {
 		dispatch({ type: POST_TYPES.LOADING_POST, payload: true })
 
-		const res = await getDataApi('posts', token)
-		dispatch({ type: POST_TYPES.GET_POST, payload: res.data })
+		const res = await getDataApi('posts', auth.token)
+		dispatch({ type: POST_TYPES.GET_POSTS, payload: res.data })
 
 		dispatch({ type: POST_TYPES.LOADING_POST, payload: false })
 	} catch (error) {
@@ -54,6 +55,7 @@ export const updatePost = ({ content, images, auth, status }) => async (dispatch
 
 		const res = await patchDataApi(`post/${status._id}`, { content, images: [...imgOldUrl, ...media] }, auth.token)
 
+		console.log(res)
 		dispatch({ type: POST_TYPES.UPDATE_POST, payload: res.data.newPost })
 
 		dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
@@ -82,5 +84,17 @@ export const unLikePost = ({ post, auth }) => async (dispatch) => {
 		await patchDataApi(`post/${post._id}/unlike`, null, auth.token)
 	} catch (error) {
 		dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
+	}
+}
+
+export const getPost = ({ detailPost, id, auth }) => async (dispatch) => {
+	if (detailPost.every((post) => post._id !== id)) {
+		try {
+			const res = await getDataApi(`/post/${id}`, auth.token)
+
+			dispatch({ type: POST_TYPES.GET_POST, payload: res.data.post })
+		} catch (error) {
+			dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
+		}
 	}
 }

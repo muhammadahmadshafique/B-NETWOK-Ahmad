@@ -1,20 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
 import Avatar from '../Avatar'
-import { getProfileUsers } from '../../redux/actions/profileAction'
 import EditProfile from './EditProfile'
 import FollowBtn from '../FollowBtn'
 import Followers from './Followers'
 import Following from './Following'
 import { GLOBALTYPES } from '../../redux/constants'
 
-const Info = () => {
-	const { id } = useParams()
-	const { auth, profile } = useSelector((state) => state)
-
-	const dispatch = useDispatch()
-
+const Info = ({ id, auth, profile, dispatch }) => {
 	const [userData, setUserData] = useState([])
 	const [onEdit, setOnEdit] = useState(false)
 
@@ -25,9 +17,6 @@ const Info = () => {
 		if (id === auth.user._id) {
 			setUserData([auth.user])
 		} else {
-			// console.log(profile)
-			dispatch(getProfileUsers({ users: profile.users, id, auth }))
-
 			const newData = profile.users.filter((user) => user._id === id)
 			setUserData(newData)
 		}

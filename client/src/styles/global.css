@@ -33,6 +33,11 @@ code {
 img {
 	object-fit: cover;
 }
+.mode {
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
 
 /* -----AUTH----- */
 @import url('./auth.css');
@@ -58,8 +63,5 @@ img {
 /* ---- Comments ---- */
 @import url('./comments.css');
 
-.mode {
-	width: 100%;
-	height: 100vh;
-	overflow: hidden;
-}
+/* ---- POST THUMB ---- */
+@import url('./post_thumb.css');

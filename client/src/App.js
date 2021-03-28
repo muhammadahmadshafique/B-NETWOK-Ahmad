@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -26,10 +26,9 @@ function App() {
 	}, [dispatch])
 
 	useEffect(() => {
-		if (auth.token) dispatch(getPosts(auth.token))
-	}, [dispatch, auth.token])
+		if (auth.token) dispatch(getPosts({ auth }))
+	}, [dispatch, auth])
 
-	const d = new Date()
 	return (
 		<Router>
 			<Alert />

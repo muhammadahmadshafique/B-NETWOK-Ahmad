@@ -7,6 +7,7 @@ import profileReducer from './profileReducer'
 import statusReducer from './statusReducer'
 import postReducer from './postReducer'
 import modalReducer from './modalReducer'
+import detailPostReducer from './detailPostReducer'
 
 export default combineReducers({
 	auth: authReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
 	status: statusReducer,
 	homePosts: postReducer,
 	modal: modalReducer,
+	detailPost: detailPostReducer,
 })
