@@ -33,7 +33,10 @@ export const getPosts = ({ auth }) => async (dispatch) => {
 		dispatch({ type: POST_TYPES.LOADING_POST, payload: true })
 
 		const res = await getDataApi('posts', auth.token)
-		dispatch({ type: POST_TYPES.GET_POSTS, payload: res.data })
+		dispatch({
+			type: POST_TYPES.GET_POSTS,
+			payload: { ...res.data, page: 2 },
+		})
 
 		dispatch({ type: POST_TYPES.LOADING_POST, payload: false })
 	} catch (error) {
