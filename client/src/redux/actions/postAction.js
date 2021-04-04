@@ -1,6 +1,6 @@
 import { GLOBALTYPES } from '../constants'
 import { imageUpload } from '../../utils/imageUpload'
-import { postDataApi, getDataApi, patchDataApi } from '../../utils/fetchData'
+import { postDataApi, getDataApi, patchDataApi, deleteDataApi } from '../../utils/fetchData'
 
 export const POST_TYPES = {
 	CREATE_POST: 'CREATE_POST',
@@ -8,6 +8,7 @@ export const POST_TYPES = {
 	GET_POSTS: 'GET_POSTS',
 	UPDATE_POST: 'UPDATE_POST',
 	GET_POST: 'GET_POST',
+	DELETE_POST: 'DELETE_POST',
 }
 
 export const createPost = ({ content, images, auth }) => async (dispatch) => {
@@ -99,5 +100,15 @@ export const getPost = ({ detailPost, id, auth }) => async (dispatch) => {
 		} catch (error) {
 			dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
 		}
+	}
+}
+
+export const deletePost = ({ post, auth }) => async (dispatch) => {
+	dispatch({ type: POST_TYPES.DELETE_POST, payload: post })
+
+	try {
+		deleteDataApi(`post/${post._id}`, auth.token)
+	} catch (error) {
+		dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
 	}
 }

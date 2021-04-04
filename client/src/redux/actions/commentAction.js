@@ -1,6 +1,6 @@
 import { DeleteData, EditData, GLOBALTYPES } from '../constants'
 import { POST_TYPES } from '../actions/postAction'
-import { postDataApi, patchDataApi, daleteDataApi } from '../../utils/fetchData'
+import { postDataApi, patchDataApi, deleteDataApi } from '../../utils/fetchData'
 
 export const createComment = ({ post, newComment, auth }) => async (dispatch) => {
 	const newPost = { ...post, comments: [...post.comments, newComment] }
@@ -74,7 +74,7 @@ export const deleteComment = ({ post, auth, comment }) => async (dispatch) => {
 	dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost })
 
 	try {
-		deleteArr.forEach((item) => daleteDataApi(`comment/${item._id}`, auth.token))
+		deleteArr.forEach((item) => deleteDataApi(`comment/${item._id}`, auth.token))
 	} catch (error) {
 		dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
 	}

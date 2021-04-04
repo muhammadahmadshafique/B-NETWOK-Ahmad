@@ -1,4 +1,5 @@
 const Posts = require('../models/postModel')
+const Comments = require('../models/commentModel')
 
 class APIfeatures {
 	constructor(query, queryString) {
@@ -85,13 +86,15 @@ const postController = {
 
 			if (post.length > 0) return res.status(400).json({ msg: 'You liked this post.' })
 
-			await Posts.findOneAndUpdate(
+			const like = await Posts.findOneAndUpdate(
 				{ _id: req.params.id },
 				{
 					$push: { likes: req.user._id },
 				},
 				{ new: true }
 			)
+
+			if (!like) return res.status(400).json({ msg: 'This post does not exist.' })
 
 			res.json({ msg: 'Post is Liked!!' })
 		} catch (error) {
@@ -101,13 +104,15 @@ const postController = {
 
 	unLikePost: async (req, res) => {
 		try {
-			await Posts.findOneAndUpdate(
+			const like = await Posts.findOneAndUpdate(
 				{ _id: req.params.id },
 				{
 					$pull: { likes: req.user._id },
 				},
 				{ new: true }
 			)
+
+			if (!like) return res.status(400).json({ msg: 'This post does not exist.' })
 
 			res.json({ msg: 'Post is Unliked!!' })
 		} catch (error) {
@@ -136,6 +141,8 @@ const postController = {
 					populate: { path: 'user likes', select: '-password' },
 				})
 
+			if (!post) return res.status(400).json({ msg: 'This post does not exist.' })
+
 			res.json({ post })
 		} catch (error) {
 			return res.status(500).json({ msg: error.message })
@@ -154,6 +161,17 @@ const postController = {
 			const posts = await features.query.sort('-createdAt')
 
 			res.json({ msg: 'Success!', result: posts.length, posts })
+		} catch (error) {
+			return res.status(500).json({ msg: error.message })
+		}
+	},
+
+	deletePost: async (req, res) => {
+		try {
+			const post = await Posts.findOneAndDelete({ _id: req.params.id, user: req.user._id })
+			await Comments.deleteMany({ _id: { $in: post.comments } })
+
+			res.json({ msg: 'Post Deleted!' })
 		} catch (error) {
 			return res.status(500).json({ msg: error.message })
 		}
