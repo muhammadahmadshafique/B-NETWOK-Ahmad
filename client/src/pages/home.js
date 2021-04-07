@@ -1,6 +1,9 @@
 import { useSelector } from 'react-redux'
+
 import Posts from '../components/home/Posts'
+import RightSideBar from '../components/home/RightSideBar'
 import Status from '../components/home/Status'
+
 import LoadIcon from '../images/loading.gif'
 
 const Home = () => {
@@ -12,13 +15,15 @@ const Home = () => {
 
 				{homePosts.loading ? (
 					<img src={LoadIcon} alt="loading" className="mx-auto d-block " />
-				) : homePosts.result === 0 ? (
+				) : homePosts.result === 0 && homePosts.posts.length === 0 ? (
 					<h2 className="text-center">No Posts</h2>
 				) : (
 					<Posts />
 				)}
 			</div>
-			<div className="col-md-4">right sidebar</div>
+			<div className="col-md-4">
+				<RightSideBar />
+			</div>
 		</div>
 	)
 }

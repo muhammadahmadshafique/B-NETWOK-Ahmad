@@ -1,4 +1,3 @@
-import { set } from 'mongoose'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { follow, unfollow } from '../redux/actions/profileAction'

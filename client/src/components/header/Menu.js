@@ -34,10 +34,10 @@ const Menu = () => {
 					</li>
 				))}
 
-				<li className="nav-item dropdown">
-					<a className="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<li className="nav-item dropdown" style={{ opacity: '1' }}>
+					<span className="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<Avatar size="medium-avatar" src={auth.user.avatar} />
-					</a>
+					</span>
 					<div className="dropdown-menu" aria-labelledby="navbarDropdown">
 						<Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
 							Profile

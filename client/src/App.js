@@ -16,6 +16,7 @@ import Header from './components/header/Header'
 import StatusModal from './components/StatusModal'
 
 import { getPosts } from './redux/actions/postAction'
+import { getSuggestions } from './redux/actions/suggestionsAction'
 
 function App() {
 	const { auth, status, modal } = useSelector((state) => state)
@@ -26,8 +27,11 @@ function App() {
 	}, [dispatch])
 
 	useEffect(() => {
-		if (auth.token) dispatch(getPosts({ auth }))
-	}, [dispatch, auth])
+		if (auth.token) {
+			dispatch(getPosts(auth.token))
+			dispatch(getSuggestions(auth.token))
+		}
+	}, [dispatch, auth.token])
 
 	return (
 		<Router>
@@ -40,8 +44,10 @@ function App() {
 					<Route exact path="/" component={auth.token ? Home : Login} />
 					<Route exact path="/register" component={Register} />
 
-					<PrivateRouter exact path="/:page" component={PageRender} />
-					<PrivateRouter exact path="/:page/:id" component={PageRender} />
+					<div style={{ marginBottom: '60px' }}>
+						<PrivateRouter exact path="/:page" component={PageRender} />
+						<PrivateRouter exact path="/:page/:id" component={PageRender} />
+					</div>
 				</div>
 			</div>
 		</Router>
