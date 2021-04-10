@@ -10,10 +10,10 @@ const RightSideBar = () => {
 	const dispatch = useDispatch()
 
 	return (
-		<div className="my-4 ">
+		<div className="my-4">
 			<UserCard user={auth.user} />
 
-			<div className="pt-2 my-2 d-flex justify-content-between align-items-center">
+			<div className="pt-2 mt-2 d-flex justify-content-between align-items-center">
 				<h6 className="text-muted">Suggestions For You</h6>
 
 				{!suggestions.loading && (
